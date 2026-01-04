@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import Swap from '../../assets/icons/Swap.svg'
 
 interface BaseAccountProps {
   lastFourDigits: string;
@@ -65,7 +66,7 @@ const InternalTransferComponent: React.FC = () => {
             <>
               <SavingsComponent savingsBalance={200.12} lastFourDigits="1234" />
               <TouchableOpacity onPress={() => setIsSavings(false)}>
-                <Text style={styles.confirmButtonText}>SVG</Text>
+                <Swap height={20} width={20}></Swap>
               </TouchableOpacity>
               <CheckingsComponent checkingsBalance={2043.12} lastFourDigits="1234" />
             </>
@@ -73,7 +74,7 @@ const InternalTransferComponent: React.FC = () => {
             <>
               <CheckingsComponent checkingsBalance={2043.12} lastFourDigits="1234" />
               <TouchableOpacity onPress={() => setIsSavings(true)}>
-                <Text style={styles.confirmButtonText}>SVG</Text>
+                <Swap height={20} width={20}></Swap>
               </TouchableOpacity>
               <SavingsComponent savingsBalance={200.12} lastFourDigits="1234" />
             </>
@@ -114,15 +115,19 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     borderRadius: 10,
+    marginTop: 20,
+
+    // iOS shadow
     shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 5,
-    marginTop: 20
-  }, 
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+
+    // Android shadow
+    elevation: 4,
+  },
 confirmButton: {
   backgroundColor: 'white',
   padding: 10,

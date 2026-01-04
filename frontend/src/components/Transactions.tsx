@@ -33,7 +33,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 8,
     marginTop: 20,
+
+    // iOS shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+
+    // Android shadow
+    elevation: 4,
   },
+
+
   logo: {
     width: 40,
     height: 40,

@@ -1,95 +1,127 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import FDICBadge from './FDICBadge';
-import UbuntuText from './UbuntuText';
-import * as Font from 'expo-font';
-import AppLoading from 'expo-app-loading';
-import { LoginBoxProps } from './LoginBoxProps';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { useState } from "react";
 
-const WireTransferComponent: React.FC = () => {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const navigation = useNavigation<any>();
+export default function WireTransferForm() {
+  const [form, setForm] = useState({
+    recipientName: "",
+    bankName: "",
+    routingNumber: "",
+    accountNumber: "",
+    amount: "",
+    note: "",
+  });
 
-  const handleLogin = () => {
-    // Replace this with real authentication
-    if (userName && password) {
-        navigation.navigate('Home');
-      Alert.alert('Login Info', `Username: ${userName}\nPassword: ${password}`);
-    } else {
-      Alert.alert('Error', 'Please enter username and password.');
-    }
-  }; 
-
-
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      "Ubuntu-Bold": require("../../assets/fonts/Ubuntu-Bold.ttf"),
-      "Ubuntu-Light": require("../../assets/fonts/Ubuntu-Light.ttf"),
-      "BBHBartle-Regular": require("../../assets/fonts/BBHBartle-Regular.ttf"),
-    });
+  const handleChange = (key: string, value: string) => {
+    setForm({ ...form, [key]: value });
   };
 
+  const handleSubmit = () => {
+    console.log("Wire Transfer Submitted:", form);
+    // TODO: send to backend / API
+  };
 
-    if (!loadFonts) {
-    return <AppLoading startAsync={loadFonts} onFinish={() => {}} onError={console.warn} />;
-  }
   return (
-    <View style={styles.container}>      
-        <Text> This is the wire transfer.</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Wire Transfer</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Recipient Full Name"
+        value={form.recipientName}
+        onChangeText={(v) => handleChange("recipientName", v)}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Bank Name"
+        value={form.bankName}
+        onChangeText={(v) => handleChange("bankName", v)}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Routing Number"
+        keyboardType="numeric"
+        value={form.routingNumber}
+        onChangeText={(v) => handleChange("routingNumber", v)}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Account Number"
+        keyboardType="numeric"
+        value={form.accountNumber}
+        onChangeText={(v) => handleChange("accountNumber", v)}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Amount ($)"
+        keyboardType="decimal-pad"
+        value={form.amount}
+        onChangeText={(v) => handleChange("amount", v)}
+      />
+
+      <TextInput
+        style={[styles.input, styles.textArea]}
+        placeholder="Note (optional)"
+        multiline
+        value={form.note}
+        onChangeText={(v) => handleChange("note", v)}
+      />
+
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Send Wire</Text>
+      </TouchableOpacity>
     </View>
   );
-};
-
-export default WireTransferComponent;
+}
 
 const styles = StyleSheet.create({
   container: {
-    width: '80%',
     padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 10,
+    backgroundColor: '#ffffff',
+    marginTop: 20,
+    borderRadius: 5,
+
+    // iOS shadow
     shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 5,
-    alignSelf: 'center',
-    marginTop: 100,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+
+    // Android shadow
+    elevation: 4,
   },
+
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontWeight: "600",
     marginBottom: 20,
-    textAlign: 'center',
-    color: '#003366',
+    textAlign: "center",
+    color: '#003366'
   },
   input: {
-    height: 50,
-    borderColor: '#ccc',
     borderWidth: 1,
+    borderColor: "#ccc",
     borderRadius: 8,
-    paddingHorizontal: 15,
-    marginBottom: 15,
+    padding: 12,
+    marginBottom: 12,
+  },
+  textArea: {
+    height: 80,
+    textAlignVertical: "top",
   },
   button: {
-    backgroundColor: '#003366',
-    paddingVertical: 15,
-    borderRadius: 8,
+    backgroundColor: "#ffffffff",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 10,
   },
   buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  forgotButton: {
-    marginTop: 10,
-    paddingVertical: 10,
-    backgroundColor: 'transparent',
-  },
-  forgotButtonText: {
-    color: '#003366',
-    textAlign: 'center',
+    color: "#003366",
+    fontSize: 16,
+    fontWeight: "400",
   },
 });

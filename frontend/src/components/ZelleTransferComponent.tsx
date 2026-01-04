@@ -197,15 +197,20 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     borderRadius: 10,
+    marginTop: 20,
+
+    // iOS shadow
     shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 5,
-    marginTop: 20
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+
+    // Android shadow
+    elevation: 4,
   },
+
   input: {
     height: 50,
     borderColor: '#ccc',

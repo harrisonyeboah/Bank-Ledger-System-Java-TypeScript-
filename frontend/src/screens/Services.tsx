@@ -20,7 +20,9 @@ export default function Services() {
   const nightTimeGradient = { upper: '#1a1a2e', middle: '#0f3057', lower: '#001f3f' };
   const defaultGradient = { upper: '#32608fff', middle: '#7693acff', lower: '#ffffff' };
 
-  let currentTimeGradient = defaultGradient;
+  const whiteGradient = { upper: '#f2f2f7', middle: '#f2f2f7', lower: '#f2f2f7' };
+
+  let currentTimeGradient = whiteGradient;
 
   return (
     <LinearGradient
@@ -49,10 +51,11 @@ const styles = StyleSheet.create({
   greetingsTitle: {
     marginTop: 75,     // space from top / status bar
     marginLeft: 0,     // aligns to left
-    color: 'white',
+    color: '#003366',
     fontFamily: 'Ubuntu-Bold',
     fontSize: 25,
     fontWeight: 'bold',
+    
   },
   navBarDiv: {
     position: 'absolute',      // position relative to parent/screen

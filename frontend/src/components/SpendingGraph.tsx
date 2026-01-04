@@ -90,16 +90,21 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     borderRadius: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 5,
     marginTop: 25,
     alignItems: 'center',
+
+    // iOS shadow (matched style)
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+
+    // Android shadow
+    elevation: 4,
   },
+
   innerText: {
     color: '#003366',
     fontWeight: 'bold',

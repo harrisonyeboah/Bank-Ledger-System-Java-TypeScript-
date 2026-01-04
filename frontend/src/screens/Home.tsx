@@ -29,8 +29,9 @@ export default function Home() {
   const eveningTimeGradient = { upper: '#32608fff', middle: '#072f57ff', lower: '#003366' }
   const nightTimeGradient = { upper: '#1a1a2e', middle: '#0f3057', lower: '#001f3f' };
   const defaultGradient = { upper: '#32608fff', middle: '#7693acff', lower: '#ffffff' };
+  const whiteGradient = { upper: '#f2f2f7', middle: '#f2f2f7', lower: '#f2f2f7' };
 
-  let currentTimeGradient = defaultGradient;
+  let currentTimeGradient = whiteGradient;
 
   return (
     <LinearGradient
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
   greetingsTitle: {
     marginTop: 75,     // space from top / status bar
     marginLeft: 0,     // aligns to left
-    color: 'white',
+    color: '#003366',
     fontFamily: 'Ubuntu-Bold',
     fontSize: 25,
     fontWeight: 'bold',
@@ -73,15 +74,35 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     paddingVertical: 8,
-    backgroundColor: '#fff',
-    borderTopWidth: .5,
-    borderTopColor: '#e6e6e6ff',
-    elevation: 5,              // shadow on Android
+    backgroundColor: '#ffffff',
+    borderTopWidth: 0,         // remove the line; shadow handles separation
+    borderRadius: 8,           // optional: makes it look slightly elevated
     zIndex: 10,
-  }, 
+
+    // iOS shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -3 }, // negative height for top shadow
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+
+    // Android shadow
+    elevation: 4,
+  },
+
   userBoxContainer: {
     marginTop: 25,
-    backgroundColor: 'white', 
-    borderRadius: 5
-  }           // ensure it appears on top
+    backgroundColor: '#ffffff',
+    borderRadius: 5,
+
+    // iOS shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+
+    // Android shadow
+    elevation: 4,
+  },
+
+          // ensure it appears on top
 })

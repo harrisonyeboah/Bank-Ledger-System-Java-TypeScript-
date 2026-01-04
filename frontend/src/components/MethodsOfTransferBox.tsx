@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Zelle from "../../assets/icons/Zelle.svg";
+import Swap from "../../assets/icons/Swap.svg";
+import WireTransfer from "../../assets/icons/WireTransfer.svg";
 
 interface MethodsOfTransferBoxProps {
   boxChangeFunction: (method: string) => void;
@@ -23,21 +26,21 @@ const MethodsOfTransferBox = ({
         style={styles.button}
         onPress={() => boxChangeFunction("zelle")}
       >
-        <Text style={styles.buttonText}>Zelle</Text>
+          <Zelle width={35} height={35} />
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
         onPress={() => boxChangeFunction("internal")}
       >
-        <Text style={styles.buttonText}>Internal Transfer</Text>
+        <Swap width={35} height={35} />
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
         onPress={() => boxChangeFunction("wire")}
       >
-        <Text style={styles.buttonText}>Wire Transfer</Text>
+        <WireTransfer width={35} height={35} />
       </TouchableOpacity>
 
     </View>
@@ -47,20 +50,24 @@ const MethodsOfTransferBox = ({
 export default MethodsOfTransferBox;
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 5,
-    marginTop: 50, 
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
+container: {
+  width: '100%',
+  padding: 0,
+  backgroundColor: '#ffffff',
+  borderRadius: 10,
+  marginTop: 50,
+  flexDirection: 'row',
+  justifyContent: 'space-around',
+
+  // iOS shadow
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 3 },
+  shadowOpacity: 0.1,
+  shadowRadius: 8,
+
+  // Android shadow
+  elevation: 4,
+},
   title: {
     fontSize: 24,
     fontWeight: 'bold',

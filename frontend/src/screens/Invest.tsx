@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, Alert, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, Alert, ScrollView, TextInput } from 'react-native';
 import LoginBox from '../components/loginBox';
 import ForgotBox from '../components/ForgotBox';
 import FDICBadge from '../components/FDICBadge';
@@ -10,6 +10,9 @@ import Transactions from '../components/Transactions';
 import { LinearGradient } from 'expo-linear-gradient';
 import SpendingGraph from '../components/SpendingGraph';
 import BottomNavBar from '../components/BottomNavbar';
+import InvestmentBalanceBox from '../components/InvestmentBalanceBox';
+import StockGraphComponent from '../components/StockGraphComponent';
+import FeaturedStocks from '../components/FeaturedStocks';
 
 export default function Invest() {
   const now = new Date();
@@ -20,15 +23,36 @@ export default function Invest() {
   const nightTimeGradient = { upper: '#1a1a2e', middle: '#0f3057', lower: '#001f3f' };
   const defaultGradient = { upper: '#32608fff', middle: '#7693acff', lower: '#ffffff' };
 
-  let currentTimeGradient = defaultGradient;
+  const whiteGradient = { upper: '#f2f2f7', middle: '#f2f2f7', lower: '#f2f2f7' };
+
+  let currentTimeGradient = whiteGradient;
+  const [text, setText] = useState('');
+
+  const featuredStocks = [
+  { ticker: 'AAPL', price: 145.32, percentSinceLastInvested: 2.5 },
+  { ticker: 'GOOG', price: 2735.65, percentSinceLastInvested: -1.2 },
+  { ticker: 'AMZN', price: 3342.88, percentSinceLastInvested: 0.8 },
+  { ticker: 'MSFT', price: 299.01, percentSinceLastInvested: 1.7 },
+  { ticker: 'TSLA', price: 720.45, percentSinceLastInvested: -0.5 },
+  { ticker: 'NFLX', price: 525.12, percentSinceLastInvested: 3.1 },
+  { ticker: 'NVDA', price: 195.33, percentSinceLastInvested: 4.2 },
+  { ticker: 'FB', price: 332.45, percentSinceLastInvested: -2.3 },
+];
+
+<FeaturedStocks allFeaturedStocks={featuredStocks} />
+
 
   return (
     <LinearGradient
       colors={[currentTimeGradient.upper, currentTimeGradient.middle, currentTimeGradient.lower]}
       style={styles.gradient}
     >
+
       <ScrollView>
-        <Text style={styles.greetingsTitle}> This is Investment Page </Text>
+        <InvestmentBalanceBox></InvestmentBalanceBox>
+        <TextInput style={styles.input} placeholder="Search Ticker" value={text} onChangeText={setText} />
+        <StockGraphComponent ticker="APPL" price={25.99} priceStamps={[12, 23, 18]}></StockGraphComponent>
+        <FeaturedStocks allFeaturedStocks={featuredStocks}></FeaturedStocks>
       </ScrollView>
       <View style={styles.navBarDiv}>
         <BottomNavBar></BottomNavBar>
@@ -49,10 +73,20 @@ const styles = StyleSheet.create({
   greetingsTitle: {
     marginTop: 75,     // space from top / status bar
     marginLeft: 0,     // aligns to left
-    color: 'white',
+    color: '#003366',
     fontFamily: 'Ubuntu-Bold',
     fontSize: 25,
     fontWeight: 'bold',
+  },
+    input: {
+    borderWidth: .5,
+    borderColor: '#003366',
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+    fontSize: 16,
+    color: '#003366',
+    marginTop: 20,
   },
   navBarDiv: {
     position: 'absolute',      // position relative to parent/screen
