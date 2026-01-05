@@ -19,7 +19,7 @@ const UserBox = () => {
 
 export default function Home() {
 
-    /* We will make contributtion through our documnentation. */
+    /* We will make contributtion through our . */
   const transactions = [
     {
       date: "12/29",
