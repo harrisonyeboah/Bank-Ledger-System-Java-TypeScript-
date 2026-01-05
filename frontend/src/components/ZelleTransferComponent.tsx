@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 
 export interface EachContactProps {
   id: string;
@@ -65,6 +65,13 @@ const SendToPersonComponent: React.FC<SendToPersonProps> = ({ name, phoneNumber,
     ['C','0','⌫'], // C = clear, ⌫ = backspace
   ];
 
+  const zellePayment = (phoneNumber: string) => {
+  console.log('Sending Zelle payment to:', phoneNumber);
+  Alert.alert('Sending Zelle payment to:', phoneNumber);
+
+};
+
+
   return (
     
   <View style={styles.sendToPersonContainer}>
@@ -100,6 +107,13 @@ const SendToPersonComponent: React.FC<SendToPersonProps> = ({ name, phoneNumber,
           ))}
         </View>
       ))}
+      <TouchableOpacity
+      style={styles.sendButton}
+      onPress={() => zellePayment(phoneNumber)}
+    >
+      <Text style={styles.sendButtonText}>Send</Text>
+    </TouchableOpacity>
+
     </View>
   </View>
 );
@@ -127,6 +141,10 @@ const ZelleTransferComponent: React.FC<ZelleTransferComponent> = ({yourContacts}
     setPhoneNumber("");
     setId("");
   }
+  const zellePayment = (phoneNumber: string) => {
+  console.log('Sending Zelle payment to:', phoneNumber);
+};
+
 
     const handleSearch = (yourContacts: EachContactProps[]) => {
         if (!currentSearch.trim()) return;
@@ -274,5 +292,17 @@ backButtonText: {
   color: '#003366',
   fontWeight: '600',
   textAlign: 'left',    
+},
+sendButton: {
+  backgroundColor: '#003366',
+  paddingVertical: 12,
+  borderRadius: 8,
+  alignItems: 'center',
+  marginTop: 16,
+},
+sendButtonText: {
+  color: '#fff',
+  fontSize: 16,
+  fontWeight: '600',
 },
 });

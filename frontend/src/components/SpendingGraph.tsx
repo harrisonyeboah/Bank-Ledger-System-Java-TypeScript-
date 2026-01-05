@@ -41,7 +41,8 @@ const SpendingGraph: React.FC<LastSevenTransactionsProps> = ({ lastSevenDaysSpen
     decimalPlaces: 2,
     color: (opacity = 1) => `rgba(0, 51, 102, ${opacity})`,
     labelColor: (opacity = 1) => `rgba(0, 51, 102, ${opacity})`,
-    propsForDots: { r: '0', strokeWidth: '0', stroke: '#fff' },
+    propsForDots: { r: '0', strokeWidth: '0', stroke: '#fff' }, 
+    strokeWidth: 1
   };
 
   return (
@@ -59,7 +60,6 @@ const SpendingGraph: React.FC<LastSevenTransactionsProps> = ({ lastSevenDaysSpen
           withVerticalLines={false}
           withInnerLines={false}
           style={styles.chart}
-          
         />
       </ScrollView>
     </View>
