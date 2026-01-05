@@ -1,7 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import UbuntuText from './UbuntuText';
-import { MaterialIcons } from '@expo/vector-icons';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import HomeIcon from "../../assets/icons/Home.svg";
 import TransferMoney from "../../assets/icons/TransferMoney.svg";
 import Invest from "../../assets/icons/Invest.svg"; 
@@ -14,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const BottomNavBar: React.FC = () => {
+  /*  This is the nav bar there is navgations SVG files such as home icon, transfer money, invest and our services*/
     const navigation = useNavigation<any>();
   return (
   <View style={styles.container}>
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
     paddingBottom:20,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between', // added this
+    justifyContent: 'space-between',
     backgroundColor: '#ffffff',
     borderRadius: 8,
     marginTop: 20,

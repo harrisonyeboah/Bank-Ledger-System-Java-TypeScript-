@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, Alert, ScrollView } from 'react-native';
-import LoginBox from '../components/loginBox';
-import ForgotBox from '../components/ForgotBox';
-import FDICBadge from '../components/FDICBadge';
-import UbuntuText from '../components/UbuntuText';
-import TypeOfAccount from '../components/CheckingBox';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Transactions from '../components/Transactions';
+import { View, StyleSheet, ScrollView } from 'react-native';
+
 import { LinearGradient } from 'expo-linear-gradient';
-import SpendingGraph from '../components/SpendingGraph';
+
 import BottomNavBar from '../components/BottomNavbar';
 import MethodsOfTransferBox from '../components/MethodsOfTransferBox';
 import ZelleTransferComponent from '../components/ZelleTransferComponent';
 import InternalTransferComponent from '../components/InternalTransferComponent';
 import WireTransferComponent from '../components/WireTransferComponent';
+import { EachContactProps } from '../components/ZelleTransferComponent';
 
 export default function Transfers() {
   const [currentBox, setCurrentBox] = useState<"zelle" | "internal" | "wire">("zelle");
@@ -30,6 +25,22 @@ export default function Transfers() {
 
   let currentTimeGradient = whiteGradient;
 
+
+    const contactsOfHarrison: EachContactProps[] = [
+    { id: "1", name: "Alex Johnson", phoneNumber: "555-123-4567", onPress: () => {} },
+    { id: "2", name: "Maria Gonzalez", phoneNumber: "555-234-7890", onPress: () => {} },
+    { id: "3", name: "James Carter", phoneNumber: "555-345-1122", onPress: () => {} },
+    { id: "4", name: "Aisha Khan", phoneNumber: "555-456-3344", onPress: () => {} },
+    { id: "5", name: "Daniel Kim", phoneNumber: "555-567-8899", onPress: () => {} },
+    { id: "6", name: "Olivia Brown", phoneNumber: "555-678-2233", onPress: () => {} },
+    { id: "7", name: "Ethan Wilson", phoneNumber: "555-789-4455", onPress: () => {} },
+    { id: "8", name: "Sophia Martinez", phoneNumber: "555-890-6677", onPress: () => {} },
+    { id: "9", name: "Noah Anderson", phoneNumber: "555-901-8899", onPress: () => {} },
+    { id: "10", name: "Priya Patel", phoneNumber: "555-012-3344", onPress: () => {} },
+    { id: "11", name: "Michael Thompson", phoneNumber: "555-147-2589", onPress: () => {} },
+    { id: "12", name: "Fatima Noor", phoneNumber: "555-258-3691", onPress: () => {} },
+  ];
+
   const methodStateChange = (newState: string) => {
     setCurrentBox(newState);
   }
@@ -41,7 +52,7 @@ export default function Transfers() {
     >
       <ScrollView>
         <MethodsOfTransferBox boxChangeFunction={methodStateChange}></MethodsOfTransferBox>
-        {currentBox === "zelle" && <ZelleTransferComponent />}
+        {currentBox === "zelle" && <ZelleTransferComponent yourContacts={contactsOfHarrison} />}
         {currentBox === "internal" && <InternalTransferComponent />}
         {currentBox === "wire" && <WireTransferComponent />}
 

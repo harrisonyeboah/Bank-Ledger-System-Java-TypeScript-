@@ -1,11 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import UbuntuText from './UbuntuText';
-import { MaterialIcons } from '@expo/vector-icons';
-import HomeIcon from "../../assets/icons/Home.svg";
-import TransferMoney from "../../assets/icons/TransferMoney.svg";
-import Invest from "../../assets/icons/Invest.svg"; 
-import OurServices from "../../assets/icons/OurServices.svg"; 
 import { useNavigation } from '@react-navigation/native';
 
 

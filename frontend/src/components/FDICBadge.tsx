@@ -1,20 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import UbuntuText from './UbuntuText';
 
 
 
 
 const FDICBadge: React.FC = () => {
+  // This is the FDIC insurance badge for the login page
   return (
     <View style={styles.container}>
-      {/* Optional FDIC logo */}
       <Image
         source={require('../../assets/FDIC.png')}
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.text}> Yeboah is FDIC insured</Text>
+      <Text style={styles.text}> This bank is FDIC insured</Text>
     </View>
   );
 };

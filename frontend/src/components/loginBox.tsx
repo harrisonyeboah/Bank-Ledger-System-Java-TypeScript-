@@ -69,19 +69,25 @@ const LoginBox: React.FC<LoginBoxProps> = ({ boxChangeFunction }) => {
 export default LoginBox;
 
 const styles = StyleSheet.create({
-  container: {
-    width: '80%',
-    padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 5,
-    alignSelf: 'center',
-    marginTop: 100,
-  },
+container: {
+  width: '80%',
+  backgroundColor: '#ffffff',
+  paddingVertical: 16,
+  paddingHorizontal: 20,
+  borderRadius: 10,
+  marginTop: 100,
+  alignSelf: 'center',
+
+  // iOS shadow
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 3 },
+  shadowOpacity: 0.1,
+  shadowRadius: 7,
+
+  // Android shadow
+  elevation: 4,
+},
+
   title: {
     fontSize: 24,
     fontWeight: 'bold',

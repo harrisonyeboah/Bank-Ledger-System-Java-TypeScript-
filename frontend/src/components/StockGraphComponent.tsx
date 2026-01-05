@@ -1,59 +1,26 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
-import UbuntuText from './UbuntuText';
-import { MaterialIcons } from '@expo/vector-icons';
-import HomeIcon from "../../assets/icons/Home.svg";
-import TransferMoney from "../../assets/icons/TransferMoney.svg";
-import Invest from "../../assets/icons/Invest.svg"; 
-import OurServices from "../../assets/icons/OurServices.svg"; 
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { LineChart, BarChart, PieChart,  } from 'react-native-gifted-charts';
+import { LineChart } from 'react-native-gifted-charts';
 
 
 
+interface LineChartDataPoint {
+  value: number;
+}
 
 interface StockGraphComponentProps {
     ticker: string
     price: number
-    priceStamps: number[];
+    data: LineChartDataPoint[]
 }
 
 
-const StockGraphComponent: React.FC<StockGraphComponentProps> = ({ticker, price, priceStamps}) => {
+const StockGraphComponent: React.FC<StockGraphComponentProps> = ({ticker, price, data}) => {
+    /* This is the stock graph component that takes in the ticker, data this the componen for graphing the component for appl right now*/
     const navigation = useNavigation<any>();
     const screenWidth = Dimensions.get('window').width;
- const data = [
-    { value: 50 },
-    { value: 80 },
-    { value: 40 },
-    { value: 95 },
-    { value: 75 },
-    { value: 60 },
-    { value: 100 },
-    { value: 85 },
-    { value: 90 },
-    { value: 70 },
-    { value: 95 },
-    { value: 110 },
-    { value: 120 },
-    { value: 105 },
-    { value: 130 },
-    { value: 125 },
-    { value: 140 },
-    { value: 135 },
-    { value: 150 },
-    { value: 145 },
-    { value: 160 },
-    { value: 155 },
-    { value: 170 },
-    { value: 165 },
-    { value: 180 },
-    { value: 175 },
-    { value: 190 },
-    { value: 185 },
-    { value: 200 },
-    { value: 195 },
-  ]; // few points
+
 
   const containerPadding = 16;
   const chartWidth = screenWidth - containerPadding * 2;

@@ -9,6 +9,9 @@ import UbuntuText from '../components/UbuntuText';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Login() {
+    const whiteGradient = { upper: '#f2f2f7', middle: '#f2f2f7', lower: '#f2f2f7' };
+
+    let currentTimeGradient = whiteGradient;
     const [isLogin, setIsLogin] = useState(true);
 
     const ClickOnForgot = () => {
@@ -17,12 +20,15 @@ export default function Login() {
     const handleBoxChange = () => {
         setIsLogin(!isLogin);
     }
+    const sendForgotRequest = () => {
+      Alert.alert('We have sent a request to you.');
+    }
   return (
     <LinearGradient
-      colors={['#32608fff', '#072f57ff', '#003366']}
+      colors={[currentTimeGradient.upper, currentTimeGradient.middle, currentTimeGradient.lower]}
       style={styles.gradient}
     >
-    {isLogin === true ? <LoginBox boxChangeFunction={handleBoxChange} /> : <ForgotBox boxChangeFunction={handleBoxChange}/>}
+    {isLogin === true ? <LoginBox boxChangeFunction={handleBoxChange} /> : <ForgotBox boxChangeFunction={handleBoxChange} handleForgotFunction={sendForgotRequest}/>}
     </LinearGradient>
 
   );

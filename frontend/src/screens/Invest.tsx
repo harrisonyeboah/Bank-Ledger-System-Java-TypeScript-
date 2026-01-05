@@ -51,7 +51,7 @@ export default function Invest() {
       <ScrollView>
         <InvestmentBalanceBox></InvestmentBalanceBox>
         <TextInput style={styles.input} placeholder="Search Ticker" value={text} onChangeText={setText} />
-        <StockGraphComponent ticker="APPL" price={25.99} priceStamps={[12, 23, 18]}></StockGraphComponent>
+        <StockGraphComponent ticker="APPL" price={25.99} data={[ { value: 50 }, { value: 80 }, { value: 40 }, { value: 95 }, { value: 75 }, { value: 60 }, { value: 100 }, { value: 85 }, { value: 90 }, { value: 70 }, { value: 95 }, { value: 110 }, { value: 120 }, { value: 105 }, { value: 130 }, { value: 125 }, { value: 140 }, { value: 135 }, { value: 150 }, { value: 145 }, { value: 160 }, { value: 155 }, { value: 170 }, { value: 165 }, { value: 180 }, { value: 175 }, { value: 190 }, { value: 185 }, { value: 200 }, { value: 195 }]}></StockGraphComponent>
         <FeaturedStocks allFeaturedStocks={featuredStocks}></FeaturedStocks>
       </ScrollView>
       <View style={styles.navBarDiv}>

@@ -1,27 +1,88 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Alert, ScrollView } from 'react-native';
-import LoginBox from '../components/loginBox';
-import ForgotBox from '../components/ForgotBox';
-import FDICBadge from '../components/FDICBadge';
-import UbuntuText from '../components/UbuntuText';
 import CheckingBox from '../components/CheckingBox';
 import SavingBox from  '../components/SavingBox';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import Transactions from '../components/Transactions';
 import { LinearGradient } from 'expo-linear-gradient';
 import SpendingGraph from '../components/SpendingGraph';
 import BottomNavBar from '../components/BottomNavbar';
 
 const UserBox = () => {
+  
   return (
     <View style={styles.userBoxContainer}>
-        <CheckingBox></CheckingBox>
-        <SavingBox></SavingBox>
+        <CheckingBox typeOfAccount='Checking' balance={12.42}></CheckingBox>
+        <SavingBox balance={2000.90} typeOfAccount={"Savings"}></SavingBox>
     </View>
   )
 }
 
 export default function Home() {
+
+  const transactions = [
+  {
+    "date": "12/29",
+    "method": "Debit",
+    "vendor": "McDonalds",
+    "amount": 8.99
+  },
+  {
+    "date": "12/28",
+    "method": "Debit",
+    "vendor": "Starbucks",
+    "amount": 5.75
+  },
+  {
+    "date": "12/27",
+    "method": "Debit",
+    "vendor": "Amazon",
+    "amount": 42.13
+  },
+  {
+    "date": "12/26",
+    "method": "Debit",
+    "vendor": "Target",
+    "amount": 67.42
+  },
+  {
+    "date": "12/25",
+    "method": "Debit",
+    "vendor": "Uber",
+    "amount": 14.86
+  },
+  {
+    "date": "12/24",
+    "method": "Debit",
+    "vendor": "Whole Foods",
+    "amount": 93.28
+  },
+  {
+    "date": "12/23",
+    "method": "Debit",
+    "vendor": "Apple",
+    "amount": 129.00
+  },
+  {
+    "date": "12/22",
+    "method": "Debit",
+    "vendor": "Netflix",
+    "amount": 15.99
+  },
+  {
+    "date": "12/21",
+    "method": "Debit",
+    "vendor": "Shell Gas",
+    "amount": 38.67
+  },
+  {
+    "date": "12/20",
+    "method": "Debit",
+    "vendor": "Chipotle",
+    "amount": 11.54
+  }
+]
+
+
   const now = new Date();
   const timeString = now.toLocaleTimeString(); // e.g., "3:45:12 PM"
   const morningGradient = { upper: '#A3CEF1', middle: '#69B3E7', lower: '#1E90FF' };
@@ -41,8 +102,8 @@ export default function Home() {
       <ScrollView>
         <Text style={styles.greetingsTitle}> Good Morning, Harrison</Text>
         <UserBox></UserBox>
-        <SpendingGraph></SpendingGraph>
-        <Transactions></Transactions>
+        <SpendingGraph lastSevenDaysSpending={[22, 30, 28, 35, 40, 38, 45]}></SpendingGraph>
+        <Transactions yourTransactions={transactions}></Transactions>
       </ScrollView>
       <View style={styles.navBarDiv}>
         <BottomNavBar></BottomNavBar>

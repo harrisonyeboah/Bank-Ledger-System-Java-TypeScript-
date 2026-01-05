@@ -1,33 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import FDICBadge from './FDICBadge';
-import UbuntuText from './UbuntuText';
-import * as Font from 'expo-font';
-import AppLoading from 'expo-app-loading';
-import { LoginBoxProps } from './LoginBoxProps';
-const SavingBox: React.FC = () => {
+import { View, Text, StyleSheet } from 'react-native';
 
-
-
-
-
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      "Ubuntu-Bold": require("../../assets/fonts/Ubuntu-Bold.ttf"),
-      "Ubuntu-Light": require("../../assets/fonts/Ubuntu-Light.ttf"),
-      "BBHBartle-Regular": require("../../assets/fonts/BBHBartle-Regular.ttf"),
-    });
-  };
-
-
-    if (!loadFonts) {
-    return <AppLoading startAsync={loadFonts} onFinish={() => {}} onError={console.warn} />;
-  }
+interface SavingBoxProps {
+  balance: number
+  typeOfAccount: string
+}
+const SavingBox: React.FC<SavingBoxProps> = ({balance, typeOfAccount}) => {
+  // This is the savings box it will take bank account box type and then render the ux with the props
   return (
     <View style={styles.container}>
         <View style={styles.innerContainer}>
-            <Text style={styles.innerContainerText}> Savings </Text>
-            <Text style={styles.innerContainerText}> $2,003.49</Text>
+            <Text style={styles.innerContainerText}> {typeOfAccount} </Text>
+            <Text style={styles.innerContainerText}> ${balance}</Text>
         </View>
     </View>
   );

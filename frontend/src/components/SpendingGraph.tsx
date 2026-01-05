@@ -1,44 +1,26 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import * as Font from 'expo-font';
-import AppLoading from 'expo-app-loading';
 
-const SpendingGraph: React.FC = () => {
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+interface LastSevenTransactionsProps {
+  lastSevenDaysSpending: number[]
+}
 
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      "Ubuntu-Bold": require("../../assets/fonts/Ubuntu-Bold.ttf"),
-      "Ubuntu-Light": require("../../assets/fonts/Ubuntu-Light.ttf"),
-      "BBHBartle-Regular": require("../../assets/fonts/BBHBartle-Regular.ttf"),
-    });
-  };
-
-  if (!fontsLoaded) {
-    return (
-      <AppLoading
-        startAsync={loadFonts}
-        onFinish={() => setFontsLoaded(true)}
-        onError={console.warn}
-      />
-    );
-  }
-
+const SpendingGraph: React.FC<LastSevenTransactionsProps> = ({ lastSevenDaysSpending }) => {
+  /* This component is graphing and aggregating the last 7 days of spendnig. This takes in a prop from our java api then will plot the data for the last seven days.  */
   // Generate last 7 days labels
-const last7DaysLabels = Array.from({ length: 7 }, (_, i) => {
-  const d = new Date();
-  d.setDate(d.getDate() - (6 - i));
-  const month = d.getMonth() + 1; // getMonth() is 0-based
-  const day = d.getDate();
-  return `${month}/${day}`;
-});
+  const last7DaysLabels = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date();
+    d.setDate(d.getDate() - (6 - i));
+    const month = d.getMonth() + 1; // getMonth() is 0-based
+    const day = d.getDate();
+    return `${month}/${day}`;
+  });
 
-  // Example daily spending data for last 7 days
-  const thisMonthData = [22, 30, 28, 35, 40, 38, 45];
+
 
   // Convert to cumulative data
-  const cumulativeData = thisMonthData.reduce<number[]>((acc, value, index) => {
+  const cumulativeData = lastSevenDaysSpending.reduce<number[]>((acc, value, index) => {
     acc.push((acc[index - 1] ?? 0) + value);
     return acc;
   }, []);
@@ -94,13 +76,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 25,
     alignItems: 'center',
-
     // iOS shadow (matched style)
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-
     // Android shadow
     elevation: 4,
   },

@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+
 import { StyleSheet, Text, View } from 'react-native';
 
 // This is my navigations import
@@ -9,7 +9,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './src/screens/Login';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import ForgotBox from './src/components/ForgotBox';
 import Home from './src/screens/Home';
 import Services from './src/screens/Services';
 import Transfers from './src/screens/Transfers';

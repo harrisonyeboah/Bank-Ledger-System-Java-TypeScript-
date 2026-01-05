@@ -5,30 +5,17 @@ import UbuntuText from './UbuntuText';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LoginBoxProps } from './LoginBoxProps';
-const CheckingBox: React.FC = () => {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-
-
-
-
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      "Ubuntu-Bold": require("../../assets/fonts/Ubuntu-Bold.ttf"),
-      "Ubuntu-Light": require("../../assets/fonts/Ubuntu-Light.ttf"),
-      "BBHBartle-Regular": require("../../assets/fonts/BBHBartle-Regular.ttf"),
-    });
-  };
-
-
-    if (!loadFonts) {
-    return <AppLoading startAsync={loadFonts} onFinish={() => {}} onError={console.warn} />;
-  }
+interface CheckingBoxProps {
+  typeOfAccount: string
+  balance: number
+}
+const CheckingBox: React.FC<CheckingBoxProps> = ({typeOfAccount, balance}) => {
+  /* This the checking box this basically takes in typeOfAccountProp and Balance  */
   return (
     <View style={styles.container}>
         <View style={styles.innerContainer}>
-            <Text style={styles.innerContainerText}> Checking </Text>
-            <Text style={styles.innerContainerText}> $83.83 </Text>
+            <Text style={styles.innerContainerText}> {typeOfAccount} </Text>
+            <Text style={styles.innerContainerText}> ${balance} </Text>
         </View>
     </View>
   );
@@ -37,7 +24,6 @@ const CheckingBox: React.FC = () => {
 export default CheckingBox;
 
 const styles = StyleSheet.create({
-  // This is a change
   container: {
     width: '100%',
     padding: 20,

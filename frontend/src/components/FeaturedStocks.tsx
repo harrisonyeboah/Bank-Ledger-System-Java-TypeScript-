@@ -24,11 +24,7 @@ interface EachFeaturedStockProps extends FeaturedStock {}
    Child Component
 ======================= */
 
-const EachFeaturedStock: React.FC<EachFeaturedStockProps> = ({
-  ticker,
-  price,
-  percentSinceLastInvested,
-}) => {
+const EachFeaturedStock: React.FC<EachFeaturedStockProps> = ({ ticker, price, percentSinceLastInvested }) => {
   const isPositive = percentSinceLastInvested >= 0;
 
   return (

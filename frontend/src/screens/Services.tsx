@@ -1,14 +1,5 @@
-import React, { useState } from 'react';
 import { Text, View, StyleSheet, Alert, ScrollView } from 'react-native';
-import LoginBox from '../components/loginBox';
-import ForgotBox from '../components/ForgotBox';
-import FDICBadge from '../components/FDICBadge';
-import UbuntuText from '../components/UbuntuText';
-import TypeOfAccount from '../components/CheckingBox';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Transactions from '../components/Transactions';
 import { LinearGradient } from 'expo-linear-gradient';
-import SpendingGraph from '../components/SpendingGraph';
 import BottomNavBar from '../components/BottomNavbar';
 
 export default function Services() {

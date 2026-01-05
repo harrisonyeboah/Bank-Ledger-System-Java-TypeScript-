@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Zelle from "../../assets/icons/Zelle.svg";
 import Swap from "../../assets/icons/Swap.svg";
@@ -15,8 +14,6 @@ const MethodsOfTransferBox = ({
   boxChangeFunction
 }: MethodsOfTransferBoxProps) => {
 
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
   const navigation = useNavigation<any>();
 
   return (

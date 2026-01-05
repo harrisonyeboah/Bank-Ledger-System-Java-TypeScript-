@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import UbuntuText from './UbuntuText';
 
 
-type OneTransactionProps = {
+
+export interface OneTransactionProps {
   date: string;
   method: string;
   vendor: string;
   amount: number;
-};
+}
+
 
 const OneTransaction: React.FC<OneTransactionProps> = ({date, method, vendor, amount}) => {
   return (

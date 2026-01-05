@@ -1,29 +1,42 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import UbuntuText from './UbuntuText';
 import OneTransaction from './OneTransaction';
 
+interface OneTransactionProps {
+  date: string;
+  method: string;
+  vendor: string;
+  amount: number;
+}
+
+
+interface TransactionsProps{
+  yourTransactions: OneTransactionProps[]
+}
 
 
 
-const Transactions: React.FC = () => {
+
+
+const Transactions: React.FC<TransactionsProps> = ({ yourTransactions }) => {
   return (
     <View style={styles.container}>
-        <View>
-            <Text style={styles.transactionsHeader}> Transactions </Text>
-        </View>
-        <View>
-            <OneTransaction date='12/29' method='Debit' vendor='McDonalds' amount={8.99}></OneTransaction>
-            <OneTransaction date='12/25' method='Debit' vendor='McDonalds' amount={8.99}></OneTransaction>
-            <OneTransaction date='12/24' method='Debit' vendor='McDonalds' amount={8.99}></OneTransaction>
-            <OneTransaction date='12/29' method='Debit' vendor='McDonalds' amount={8.99}></OneTransaction>
-            <OneTransaction date='12/25' method='Debit' vendor='McDonalds' amount={8.99}></OneTransaction>
-            <OneTransaction date='12/24' method='Debit' vendor='McDonalds' amount={8.99}></OneTransaction>
-        </View>
+      <Text style={styles.transactionsHeader}>Transactions</Text>
+
+      <View>
+        {yourTransactions.map((tx, index) => (
+          <OneTransaction
+            key={index} // For mock/demo data, using index is ok
+            date={tx.date}
+            method={tx.method}
+            vendor={tx.vendor}
+            amount={tx.amount}
+          />
+        ))}
+      </View>
     </View>
   );
 };
-
 export default Transactions;
 
 const styles = StyleSheet.create({

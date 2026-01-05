@@ -2,6 +2,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-nativ
 import { useState } from "react";
 
 export default function WireTransferForm() {
+  // This is the wire transfer form. We are preparing the wire transfer form with react state that takes in the form. 
+  // Then we will submit the form.
   const [form, setForm] = useState({
     recipientName: "",
     bankName: "",
@@ -17,7 +19,7 @@ export default function WireTransferForm() {
 
   const handleSubmit = () => {
     console.log("Wire Transfer Submitted:", form);
-    // TODO: send to backend / API
+
   };
 
   return (
