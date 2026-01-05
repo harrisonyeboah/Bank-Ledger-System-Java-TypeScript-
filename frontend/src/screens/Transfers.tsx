@@ -4,11 +4,11 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import BottomNavBar from '../components/BottomNavbar';
-import MethodsOfTransferBox from '../components/MethodsOfTransferBox';
-import ZelleTransferComponent from '../components/ZelleTransferComponent';
-import InternalTransferComponent from '../components/InternalTransferComponent';
-import WireTransferComponent from '../components/WireTransferComponent';
-import { EachContactProps } from '../components/ZelleTransferComponent';
+import MethodsOfTransferBox from '../components/Transfers/MethodsOfTransferBox';
+import ZelleTransferComponent from '../components/Transfers/ZelleTransferComponent';
+import InternalTransferComponent from '../components/Transfers/InternalTransferComponent';
+import WireTransferComponent from '../components/Transfers/WireTransferComponent';
+import { EachContactProps } from '../components/Transfers/ZelleTransferComponent';
 
 export default function Transfers() {
   const [currentBox, setCurrentBox] = useState<"zelle" | "internal" | "wire">("zelle");

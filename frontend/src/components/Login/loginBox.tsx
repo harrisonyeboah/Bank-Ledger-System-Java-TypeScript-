@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import FDICBadge from './FDICBadge';
-import UbuntuText from './UbuntuText';
+import UbuntuText from '../UbuntuText';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LoginBoxProps } from './LoginBoxProps';
@@ -15,12 +15,12 @@ const LoginBox: React.FC<LoginBoxProps> = ({ boxChangeFunction }) => {
   const handleLogin = () => {
     // Replace this with real authentication
     if (userName && password) {
-        navigation.navigate('Home');
+      navigation.navigate('Home');
       Alert.alert('Login Info', `Username: ${userName}\nPassword: ${password}`);
     } else {
       Alert.alert('Error', 'Please enter username and password.');
     }
-  }; 
+  };
 
 
   const loadFonts = async () => {
@@ -32,8 +32,8 @@ const LoginBox: React.FC<LoginBoxProps> = ({ boxChangeFunction }) => {
   };
 
 
-    if (!loadFonts) {
-    return <AppLoading startAsync={loadFonts} onFinish={() => {}} onError={console.warn} />;
+  if (!loadFonts) {
+    return <AppLoading startAsync={loadFonts} onFinish={() => { }} onError={console.warn} />;
   }
   return (
     <View style={styles.container}>
@@ -58,10 +58,10 @@ const LoginBox: React.FC<LoginBoxProps> = ({ boxChangeFunction }) => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-        <TouchableOpacity onPress={boxChangeFunction} style={styles.forgotButton}>
+      <TouchableOpacity onPress={boxChangeFunction} style={styles.forgotButton}>
         <Text style={styles.forgotButtonText}>Forgot Username or Password</Text>
       </TouchableOpacity>
-        <FDICBadge />
+      <FDICBadge />
     </View>
   );
 };
@@ -69,24 +69,24 @@ const LoginBox: React.FC<LoginBoxProps> = ({ boxChangeFunction }) => {
 export default LoginBox;
 
 const styles = StyleSheet.create({
-container: {
-  width: '80%',
-  backgroundColor: '#ffffff',
-  paddingVertical: 16,
-  paddingHorizontal: 20,
-  borderRadius: 10,
-  marginTop: 100,
-  alignSelf: 'center',
+  container: {
+    width: '80%',
+    backgroundColor: '#ffffff',
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 100,
+    alignSelf: 'center',
 
-  // iOS shadow
-  shadowColor: '#000',
-  shadowOffset: { width: 0, height: 3 },
-  shadowOpacity: 0.1,
-  shadowRadius: 7,
+    // iOS shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
 
-  // Android shadow
-  elevation: 4,
-},
+    // Android shadow
+    elevation: 4,
+  },
 
   title: {
     fontSize: 24,

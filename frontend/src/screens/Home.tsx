@@ -1,147 +1,147 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Alert, ScrollView } from 'react-native';
-import CheckingBox from '../components/CheckingBox';
-import SavingBox from  '../components/SavingBox';
-import Transactions from '../components/Transactions';
+import CheckingBox from '../components/Home/CheckingBox';
+import SavingBox from '../components/Home/SavingBox';
+import Transactions from '../components/Home/Transactions';
 import { LinearGradient } from 'expo-linear-gradient';
-import SpendingGraph from '../components/SpendingGraph';
+import SpendingGraph from '../components/Home/SpendingGraph';
 import BottomNavBar from '../components/BottomNavbar';
 
 const UserBox = () => {
-  
+
   return (
     <View style={styles.userBoxContainer}>
-        <CheckingBox typeOfAccount='Checking' balance={12.42}></CheckingBox>
-        <SavingBox balance={2000.90} typeOfAccount={"Savings"}></SavingBox>
+      <CheckingBox typeOfAccount='Checking' balance={12.42}></CheckingBox>
+      <SavingBox balance={2000.90} typeOfAccount={"Savings"}></SavingBox>
     </View>
   )
 }
 
 export default function Home() {
 
-const transactions = [
-  {
-    date: "12/29",
-    method: "Debit",
-    vendor: "McDonalds",
-    amount: 8.99
-  },
-  {
-    date: "12/28",
-    method: "Debit",
-    vendor: "Starbucks",
-    amount: 5.75
-  },
-  {
-    date: "12/27",
-    method: "Debit",
-    vendor: "Amazon",
-    amount: 42.13
-  },
-  {
-    date: "12/26",
-    method: "Debit",
-    vendor: "Target",
-    amount: 67.42
-  },
-  {
-    date: "12/25",
-    method: "Debit",
-    vendor: "Uber",
-    amount: 14.86
-  },
-  {
-    date: "12/24",
-    method: "Debit",
-    vendor: "Whole Foods",
-    amount: 93.28
-  },
-  {
-    date: "12/23",
-    method: "Debit",
-    vendor: "Apple",
-    amount: 129.00
-  },
-  {
-    date: "12/22",
-    method: "Debit",
-    vendor: "Netflix",
-    amount: 15.99
-  },
-  {
-    date: "12/21",
-    method: "Debit",
-    vendor: "Shell Gas",
-    amount: 38.67
-  },
-  {
-    date: "12/20",
-    method: "Debit",
-    vendor: "Chipotle",
-    amount: 11.54
-  },
-  // 10 more transactions
-  {
-    date: "12/19",
-    method: "Debit",
-    vendor: "Walmart",
-    amount: 56.22
-  },
-  {
-    date: "12/18",
-    method: "Credit",
-    vendor: "PayPal Refund",
-    amount: 25.00
-  },
-  {
-    date: "12/17",
-    method: "Debit",
-    vendor: "Costco",
-    amount: 78.90
-  },
-  {
-    date: "12/16",
-    method: "Debit",
-    vendor: "Starbucks",
-    amount: 6.45
-  },
-  {
-    date: "12/15",
-    method: "Debit",
-    vendor: "Target",
-    amount: 120.33
-  },
-  {
-    date: "12/14",
-    method: "Credit",
-    vendor: "Bank Transfer",
-    amount: 200.00
-  },
-  {
-    date: "12/13",
-    method: "Debit",
-    vendor: "Domino's",
-    amount: 22.17
-  },
-  {
-    date: "12/12",
-    method: "Debit",
-    vendor: "Apple Store",
-    amount: 499.99
-  },
-  {
-    date: "12/11",
-    method: "Debit",
-    vendor: "Lyft",
-    amount: 18.75
-  },
-  {
-    date: "12/10",
-    method: "Debit",
-    vendor: "Whole Foods",
-    amount: 67.82
-  }
-];
+  const transactions = [
+    {
+      date: "12/29",
+      method: "Debit",
+      vendor: "McDonalds",
+      amount: 8.99
+    },
+    {
+      date: "12/28",
+      method: "Debit",
+      vendor: "Starbucks",
+      amount: 5.75
+    },
+    {
+      date: "12/27",
+      method: "Debit",
+      vendor: "Amazon",
+      amount: 42.13
+    },
+    {
+      date: "12/26",
+      method: "Debit",
+      vendor: "Target",
+      amount: 67.42
+    },
+    {
+      date: "12/25",
+      method: "Debit",
+      vendor: "Uber",
+      amount: 14.86
+    },
+    {
+      date: "12/24",
+      method: "Debit",
+      vendor: "Whole Foods",
+      amount: 93.28
+    },
+    {
+      date: "12/23",
+      method: "Debit",
+      vendor: "Apple",
+      amount: 129.00
+    },
+    {
+      date: "12/22",
+      method: "Debit",
+      vendor: "Netflix",
+      amount: 15.99
+    },
+    {
+      date: "12/21",
+      method: "Debit",
+      vendor: "Shell Gas",
+      amount: 38.67
+    },
+    {
+      date: "12/20",
+      method: "Debit",
+      vendor: "Chipotle",
+      amount: 11.54
+    },
+    // 10 more transactions
+    {
+      date: "12/19",
+      method: "Debit",
+      vendor: "Walmart",
+      amount: 56.22
+    },
+    {
+      date: "12/18",
+      method: "Credit",
+      vendor: "PayPal Refund",
+      amount: 25.00
+    },
+    {
+      date: "12/17",
+      method: "Debit",
+      vendor: "Costco",
+      amount: 78.90
+    },
+    {
+      date: "12/16",
+      method: "Debit",
+      vendor: "Starbucks",
+      amount: 6.45
+    },
+    {
+      date: "12/15",
+      method: "Debit",
+      vendor: "Target",
+      amount: 120.33
+    },
+    {
+      date: "12/14",
+      method: "Credit",
+      vendor: "Bank Transfer",
+      amount: 200.00
+    },
+    {
+      date: "12/13",
+      method: "Debit",
+      vendor: "Domino's",
+      amount: 22.17
+    },
+    {
+      date: "12/12",
+      method: "Debit",
+      vendor: "Apple Store",
+      amount: 499.99
+    },
+    {
+      date: "12/11",
+      method: "Debit",
+      vendor: "Lyft",
+      amount: 18.75
+    },
+    {
+      date: "12/10",
+      method: "Debit",
+      vendor: "Whole Foods",
+      amount: 67.82
+    }
+  ];
 
 
   const now = new Date();
@@ -226,5 +226,5 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
 
-          // ensure it appears on top
+  // ensure it appears on top
 })

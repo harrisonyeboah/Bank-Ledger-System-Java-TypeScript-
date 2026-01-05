@@ -10,7 +10,7 @@ interface OneTransactionProps {
 }
 
 
-interface TransactionsProps{
+interface TransactionsProps {
   yourTransactions: OneTransactionProps[]
 }
 
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   transactionsHeader: {
-    fontSize: 15, 
+    fontSize: 15,
     color: '#003366',
     fontWeight: 'bold'
   }
