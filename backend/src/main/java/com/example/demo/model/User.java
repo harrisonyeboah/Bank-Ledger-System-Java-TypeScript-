@@ -1,5 +1,7 @@
+// Imports
 package com.example.demo.model;
 
+// Jakarta Imports
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,17 +9,32 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import java.time.LocalDate; 
 import jakarta.persistence.Column;
+
+// Java Data Type Imports 
+import java.time.LocalDate; 
+import java.util.UUID;
 @Entity
 @Table(name = "users")
 public class User {
 
     /* This is the bank user of the person who banks with Yeboah Bank */
+    // This is my user to create a user in the bank
+    public User(String firstName, String lastName, String yourSSN, LocalDate yourDOB) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.socialSecurityNumber = yourSSN;
+        this.dateOfBirth = yourDOB;
+        this.ssnLast4 = yourSSN.substring(yourSSN.length() - 4);
+        this.fullName = this.firstName + " " + this.lastName;
+        this.id = UUID.randomUUID();
+    }
+
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue
+    @Column(columnDefinition = "BINARY(16)", name= "ID")
+    private UUID id;
 
     @Column(nullable = false, name = "First Name")
     private String firstName;
@@ -43,11 +60,11 @@ public class User {
     /* -------- Getters & Setters -------- */
 
     // Id
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -98,4 +115,17 @@ public class User {
     public LocalDate getCreatedAt() {
         return createdAt;
     }
+
+    public String getUserDetails() {
+        return "User Details:\n" +
+            "ID: " + this.id + "\n" +
+            "First Name: " + this.firstName + "\n" +
+            "Last Name: " + this.lastName + "\n" +
+            "Full Name: " + this.getFullName() + "\n" +
+            "Social Security Number: " + this.socialSecurityNumber + "\n" +
+            "SSN Last 4: " + this.ssnLast4 + "\n" +
+            "Date of Birth: " + this.dateOfBirth + "\n" +
+            "Date Created: " + this.createdAt;
+    }
+
 }

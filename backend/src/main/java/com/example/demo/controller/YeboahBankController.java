@@ -12,4 +12,6 @@ public class YeboahBankController {
     public String YeboahHealthEndpoint() {
         return "Our API is officially working";
     }
+    
+
 }
