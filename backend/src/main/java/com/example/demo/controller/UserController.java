@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -54,6 +56,24 @@ public class UserController {
     public List<User> getAllUsers() {
         return userService.findAllUsers();
     }
+
+    @PutMapping("updateUser") 
+    @ResponseBody
+    public String updateString(@RequestParam UUID userId, String firstName, String lastName, String yourSSN, LocalDate yourDOB) {
+        userService.updateUser(userId, firstName, lastName, yourSSN, yourDOB);
+        return "User Updated";
+    }
+
+    // DELETE
+    @DeleteMapping("/deleteUser") 
+    @ResponseBody
+    public String deleteOneUser(@RequestParam UUID userId) {
+        userService.deleteUser(userId);
+        return "User deleted";
+    }
+    
+
+
 
 
 

@@ -18,6 +18,8 @@ import com.example.demo.repository.UserRepository;
 import java.util.UUID;
 import java.util.Optional;
 import java.util.List;
+import java.lang.RuntimeException;
+
 
 
 @Service 
@@ -48,4 +50,26 @@ public class UserService {
     public List<User> findAllUsers() {
         return yeboahUserRepository.findAll();
     }
+
+
+    public void updateUser(UUID userId, String firstName, String lastName, String yourSSN, LocalDate yourDOB) {
+        Optional<User> optionalUser = yeboahUserRepository.findById(userId);
+
+        if (optionalUser.isPresent()) {
+            User acquiredUser = optionalUser.get();
+            acquiredUser.setFirstName(firstName);
+            acquiredUser.setLastName(lastName);
+            acquiredUser.setFullName(firstName, lastName);
+
+            yeboahUserRepository.save(acquiredUser);
+        } else {
+            throw new RuntimeException("User not found with ID: " + userId);
+        }
+    }
+
+
+    public void deleteUser(UUID userId) {
+        yeboahUserRepository.deleteById(userId);
+    }
+
 }

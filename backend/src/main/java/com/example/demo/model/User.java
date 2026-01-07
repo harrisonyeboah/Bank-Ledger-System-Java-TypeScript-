@@ -92,6 +92,10 @@ public class User {
         return firstName + " " + lastName;
     }
 
+    public void setFullName(String firstName, String lastName) {
+        this.fullName = firstName + " " + lastName;
+    }
+
     // SSN
     public String getSocialSecurityNumber() {
         return socialSecurityNumber;
