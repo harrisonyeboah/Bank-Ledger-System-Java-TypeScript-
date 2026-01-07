@@ -27,13 +27,14 @@ public class User {
         this.dateOfBirth = yourDOB;
         this.ssnLast4 = yourSSN.substring(yourSSN.length() - 4);
         this.fullName = this.firstName + " " + this.lastName;
-        this.id = UUID.randomUUID();
     }
 
+    protected User() {
+    }
 
     @Id
     @GeneratedValue
-    @Column(columnDefinition = "BINARY(16)", name= "ID")
+    @Column(length = 36, name= "ID")
     private UUID id;
 
     @Column(nullable = false, name = "First Name")

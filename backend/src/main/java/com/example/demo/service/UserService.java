@@ -14,6 +14,11 @@ import java.time.LocalDate;
 import com.example.demo.model.User; 
 import com.example.demo.repository.UserRepository;
 
+// Java Imports 
+import java.util.UUID;
+import java.util.Optional;
+import java.util.List;
+
 
 @Service 
 public class UserService {
@@ -22,12 +27,25 @@ public class UserService {
     public UserService(UserRepository yourRepo) {
         this.yeboahUserRepository = yourRepo;
     }
+
+
     public String createUser(String firstName, String lastName, String yourSSN, LocalDate yourDOB) {
         /* This service will */ 
         System.out.println("This service is hit");
         User newUser = new User(firstName, lastName, yourSSN, yourDOB);  
+        yeboahUserRepository.save(newUser);
         String result = newUser.getUserDetails();
         System.out.println(result);
         return result;
+    }
+
+    public Optional<User> findUser(UUID userId) {
+        Optional<User> currentUser = yeboahUserRepository.findById(userId);
+        System.out.println(currentUser);
+        return currentUser;
+    }
+
+    public List<User> findAllUsers() {
+        return yeboahUserRepository.findAll();
     }
 }

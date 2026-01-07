@@ -7,6 +7,9 @@ import com.example.demo.model.User;
 // Spring Import 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+// Java Import 
+import java.util.UUID;
+
+public interface UserRepository extends JpaRepository<User, UUID> {
 }
 
