@@ -1,43 +1,74 @@
+// File Path 
 package com.example.demo.model;
+
+// Jakarta Imports 
 import jakarta.persistence.Column;
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+
+
+// Class Imports 
 import com.example.demo.model.User;
+
+// Java Data Type Imports 
+import java.time.LocalDate; 
+import java.util.UUID;
+import java.time.LocalDateTime;
+import java.security.SecureRandom;
+
 
 @Entity
 @Table(name = "Accounts")
 public class Account {
 
+
+
+    // When the account is created
+    public Account( AccountType accountType, String accountCurrency, AccountStatus accountStatus, User accountUser) {
+        this.accountNumber = generateAccountNumber();
+        this.accountType = accountType;
+        this.currency = accountCurrency;
+        this.user = accountUser;
+    }
+
+
+    protected Account() {
+    }
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue
+    @Column(length = 36, name= "ID")
+    private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "User Id", nullable = false)
     private User user;
 
     @Column(nullable = false, unique = true, name = "Account Number")
     private String accountNumber;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "Account Name")
-    private String accountType; 
+    private AccountType accountType;
+
 
     @Column(nullable = false, length = 3, name = "Currency")
     private String currency = "USD";
 
     @Column(nullable = false, name= "Status")
-    private String status = "ACTIVE";
+    private AccountStatus status = AccountStatus.ACTIVE;
+
 
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     /* -------- Getters & Setters -------- */
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -57,11 +88,11 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public String getAccountType() {
+    public AccountType getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(String accountType) {
+    public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
     }
 
@@ -73,12 +104,17 @@ public class Account {
         this.currency = currency;
     }
 
-    public String getStatus() {
+    public AccountStatus getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        if (status == "ACTIVE") {
+            this.status = AccountStatus.ACTIVE;
+        }
+        else {
+            this.status = AccountStatus.CLOSED;
+        }
     }
 
     public LocalDateTime getCreatedAt() {
@@ -95,5 +131,23 @@ public class Account {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    // Other public and interfaces 
+
+    public enum AccountType {
+        CHECKINGS,
+        SAVINGS
+    }
+
+    public enum AccountStatus {
+        ACTIVE,
+        CLOSED
+    }
+    
+    public String generateAccountNumber() {
+        return String.valueOf(
+            1000000000L + new SecureRandom().nextLong(9000000000L)
+        );
     }
 }
