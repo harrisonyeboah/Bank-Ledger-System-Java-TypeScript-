@@ -3,6 +3,8 @@ package com.example.demo.service;
 
 // Spring Imports 
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 // External Imports
 import jakarta.persistence.Column;
@@ -24,6 +26,15 @@ import java.util.Optional;
 import java.util.List;
 import java.lang.RuntimeException;
 import java.util.concurrent.atomic.AtomicReference;
+
+
+// Response 404 error
+@ResponseStatus(HttpStatus.NOT_FOUND)
+class AccountNotFoundException extends RuntimeException {
+    public AccountNotFoundException(UUID userId) {
+        super("Account not found for user: " + userId);
+    }
+}
 
 
 @Service 
@@ -66,12 +77,15 @@ public String newAccount(UUID userId, String accountType, String accountCurrency
     } 
     return "Error: User not found or account not created";
 }
-    public void findAccount(UUID userId) {
+    public String findAccount(UUID userId) {
+        Account account = yeboahAccountRepository.findById(userId)
+            .orElseThrow(() -> new AccountNotFoundException(userId));
 
+        return account.getAccountDetails();
     }
 
-    public void findAllAccounts() {
-        
+    public List<Account> findAllAccounts() {
+        return yeboahAccountRepository.findAll();
     }
 
 
@@ -79,9 +93,15 @@ public String newAccount(UUID userId, String accountType, String accountCurrency
 
     }
 
+    public String closeAccount(UUID accountId) {
+        Account account = yeboahAccountRepository.findById(accountId)
+                .orElseThrow(() -> new AccountNotFoundException(accountId));
 
-    public void deleteAccount(UUID userId) {
-    
+        account.setStatus("CLOSED");
+        yeboahAccountRepository.save(account);  // persist the change
+
+        return "Account " + account.getId() + " is now CLOSED.";
     }
+
 
 }

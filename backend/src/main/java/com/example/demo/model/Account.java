@@ -9,11 +9,13 @@ import jakarta.persistence.*;
 // Class Imports 
 import com.example.demo.model.User;
 
+
 // Java Data Type Imports 
 import java.time.LocalDate; 
 import java.util.UUID;
 import java.time.LocalDateTime;
 import java.security.SecureRandom;
+import java.math.BigDecimal; 
 
 
 @Entity
@@ -74,6 +76,11 @@ public class Account {
 
     @Column(nullable = false, name= "Status")
     private AccountStatus status = AccountStatus.ACTIVE;
+
+    @Column(nullable = false)
+    private BigDecimal balance = BigDecimal.ZERO;
+
+    
 
 
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -171,10 +178,12 @@ public class Account {
     }
 
     public String getAccountDetails() {
-        return "Account Number: " + accountNumber +
-               "\nAccount Type: " + accountType +
-               "\nCurrency: " + currency +
-               "\nUser: " + user.getFirstName() + " " + user.getLastName() +
-               "\nStatus: " + status;
+        return "Account ID: " + getId() +                // actual account UUID
+            "\nAccount Type: " + accountType +
+            "\nCurrency: " + currency +
+            "\nUser ID: " + user.getId() +           // user UUID
+            "\nUser Name: " + user.getFirstName() + " " + user.getLastName() +
+            "\nStatus: " + status;
     }
+
 }

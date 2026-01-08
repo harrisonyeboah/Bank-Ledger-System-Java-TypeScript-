@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+
 // Class Imports
 import com.example.demo.model.User; 
 import com.example.demo.service.UserService;
@@ -20,6 +21,8 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.model.Account; 
 import com.example.demo.service.AccountService;
 import com.example.demo.repository.AccountRepository;
+
+
 
 
 
@@ -53,15 +56,15 @@ public class AccountController {
     // READ 
     @GetMapping("/getAccount")
     @ResponseBody
-    public void getOneAccount(@RequestParam UUID accountId) {
-
+    public String getOneAccount(@RequestParam UUID accountId) {
+        return accountService.findAccount(accountId);
     }
 
 
     @GetMapping("/getAllAccounts")
     @ResponseBody
-    public void getAllAccounts() {
-
+    public List<Account> getAllAccounts() {
+        return accountService.findAllAccounts();
     }
 
     @PutMapping("/updateAccount") 
@@ -73,8 +76,8 @@ public class AccountController {
     // DELETE
     @DeleteMapping("/deleteAccount") 
     @ResponseBody
-    public void deleteOneAccount(@RequestParam UUID accountId) {
-
+    public String closeAccount(@RequestParam UUID accountId) {
+        return accountService.closeAccount(accountId);
     }
     
 
