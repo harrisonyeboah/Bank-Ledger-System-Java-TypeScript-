@@ -23,12 +23,29 @@ public class Account {
 
 
     // When the account is created
-    public Account( AccountType accountType, String accountCurrency, AccountStatus accountStatus, User accountUser) {
+    public Account(String accountType, String accountCurrency, String accountStatus, User accountUser) {
         this.accountNumber = generateAccountNumber();
-        this.accountType = accountType;
+
+        // Set account type
+        if ("CHECKINGS".equalsIgnoreCase(accountType)) {
+            this.accountType = AccountType.CHECKINGS;
+        } else if ("SAVINGS".equalsIgnoreCase(accountType)) {
+            this.accountType = AccountType.SAVINGS;
+        } else {
+            this.accountType = AccountType.PENDING;
+        }
+
         this.currency = accountCurrency;
         this.user = accountUser;
+
+        // Set account status
+        if ("ACTIVE".equalsIgnoreCase(accountStatus)) {
+            this.status = AccountStatus.ACTIVE;
+        } else {
+            this.status = AccountStatus.PENDING;
+        }
     }
+
 
 
     protected Account() {
@@ -137,11 +154,13 @@ public class Account {
 
     public enum AccountType {
         CHECKINGS,
-        SAVINGS
+        SAVINGS, 
+        PENDING
     }
 
     public enum AccountStatus {
         ACTIVE,
+        PENDING,
         CLOSED
     }
     
@@ -149,5 +168,13 @@ public class Account {
         return String.valueOf(
             1000000000L + new SecureRandom().nextLong(9000000000L)
         );
+    }
+
+    public String getAccountDetails() {
+        return "Account Number: " + accountNumber +
+               "\nAccount Type: " + accountType +
+               "\nCurrency: " + currency +
+               "\nUser: " + user.getFirstName() + " " + user.getLastName() +
+               "\nStatus: " + status;
     }
 }
