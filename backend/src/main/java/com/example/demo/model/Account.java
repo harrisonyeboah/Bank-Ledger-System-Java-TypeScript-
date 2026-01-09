@@ -8,6 +8,8 @@ import jakarta.persistence.*;
 
 // Class Imports 
 import com.example.demo.model.User;
+import com.example.demo.enums.AccountType;
+import com.example.demo.enums.AccountStatus;
 
 
 // Java Data Type Imports 
@@ -157,19 +159,6 @@ public class Account {
         this.updatedAt = updatedAt;
     }
 
-    // Other public and interfaces 
-
-    public enum AccountType {
-        CHECKINGS,
-        SAVINGS, 
-        PENDING
-    }
-
-    public enum AccountStatus {
-        ACTIVE,
-        PENDING,
-        CLOSED
-    }
     
     public String generateAccountNumber() {
         return String.valueOf(
