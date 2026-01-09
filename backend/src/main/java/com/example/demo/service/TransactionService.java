@@ -15,6 +15,7 @@ import java.time.LocalDate;
 // Class Imports 
 import com.example.demo.model.User; 
 import com.example.demo.model.Account; 
+import com.example.demo.model.Transaction; 
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.TransactionRepository;
@@ -45,21 +46,22 @@ public class TransactionService {
         this.yeboahUserRepository = yourUserRepo;
         this.yeboahTransactionRepository = yourTransactionRepo;
     }
-
-    private String findUser(UUID userId) {
-        // This method is in charge of finding the user. 
-        return "find my user";
-        //return yeboahUserRepository.findById(userId);
+    private User findUserOrThrow(UUID userId) {
+        return yeboahUserRepository.findById(userId)
+                .orElseThrow(() -> new Exceptions.UserNotFoundException(userId));
     }
 
-    private String findAccount(UUID accountId) {
-        // This method is in charge of finding the account. 
-        return "";
-        //return yeboahAccountRepository.findById(accountId);
+    private Account findAccountOrThrow(UUID accountId) {
+        return yeboahAccountRepository.findById(accountId)
+                .orElseThrow(() -> new Exceptions.AccountNotFoundException(accountId));
     }
 
-    public String makeInternalDeposit(UUID userID, UUID accountID, TransactionType type, BigDecimal amount, String currency, TransactionStatus status, String externalRef) {
-        return "Deposit made";
+
+    public String makeInternalDeposit(UUID userId, UUID accountID, TransactionType type, BigDecimal amount, String currency, TransactionStatus status, String externalRef) {
+        User myUser = findUserOrThrow(userId);
+        Account myAccount =  findAccountOrThrow(accountID);
+        Transaction depositTransaction = new Transaction(myUser, myAccount, type, amount, currency, status, externalRef);
+        return depositTransaction.getDetails();
     }
 
 

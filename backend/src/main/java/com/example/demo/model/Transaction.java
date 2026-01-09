@@ -27,7 +27,7 @@ public class Transaction {
         this.type = type;
         this.amount = amount;
         this.currency = currency;
-        this.status = status;
+        this.status = TransactionStatus.PENDING;
         this.externalRef = externalRef;
         this.createdAt = Instant.now(); // set creation timestamp
     }
@@ -65,10 +65,25 @@ public class Transaction {
     @Column(name = "Created At", nullable = false, updatable = false)
     private Instant createdAt;
 
+
+    public String getDetails() {
+        return "Transaction Details: {" +
+                "\n  User: " + user +
+                ",\n  Account: " + account +
+                ",\n  Type: " + type +
+                ",\n  Amount: " + amount.toPlainString() + " " + currency +
+                ",\n  Status: " + status +
+                ",\n  External Reference: '" + externalRef + '\'' +
+                ",\n  Created At: " + createdAt +
+                "\n}";
+    }
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = Instant.now();
     }
+
+
 
     // getters & setters omitted for brevity
 }
