@@ -56,5 +56,20 @@ public class TransactionController {
         return transactionService.makeInternalDeposit(userID, accountID, type, amount, currency, status, externalRef);
     }
 
+    // CREATE
+    @PostMapping("/internalWithdraw")
+    @ResponseBody
+    public String internalWithdraw(
+            @RequestParam UUID userID,
+            @RequestParam UUID accountID,
+            @RequestParam TransactionType type,
+            @RequestParam BigDecimal amount,
+            @RequestParam String currency,
+            @RequestParam TransactionStatus status,
+            @RequestParam(required = false) String externalRef
+    ) {
+        return transactionService.makeInternalWithdraw(userID, accountID, type, amount, currency, status, externalRef);
+    }
+
 
 }

@@ -31,6 +31,8 @@ public class Transaction {
         this.externalRef = externalRef;
         this.createdAt = Instant.now(); // set creation timestamp
     }
+    protected Transaction() {
+    }
 
     @Id
     @GeneratedValue
@@ -85,5 +87,8 @@ public class Transaction {
 
 
 
+    public void setComplete() {
+        this.status = TransactionStatus.COMPLETED;
+    }
     // getters & setters omitted for brevity
 }

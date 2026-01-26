@@ -166,13 +166,35 @@ public class Account {
         );
     }
 
+    public void getBalance() {
+        System.out.println("Account Balance: " + this.balance.toPlainString() + " " + this.currency);
+    }
+
+    public void setBalance(BigDecimal amount) {
+        this.balance = amount;
+    }
+    
+    public boolean canWithdraw(BigDecimal amount) {
+        return this.balance.subtract(amount).compareTo(BigDecimal.ZERO) >= 0;
+    }
+
+    public void performWithdraw(BigDecimal amount) {
+        if (canWithdraw(amount)) {
+            this.balance = this.balance.subtract(amount);
+        } 
+    }
+
+
     public String getAccountDetails() {
         return "Account ID: " + getId() +                // actual account UUID
             "\nAccount Type: " + accountType +
             "\nCurrency: " + currency +
             "\nUser ID: " + user.getId() +           // user UUID
             "\nUser Name: " + user.getFirstName() + " " + user.getLastName() +
-            "\nStatus: " + status;
+            "\nStatus: " + status +
+            "\nBalance: " + balance.toPlainString() + " " + currency +
+            "\nCreated At: " + createdAt +
+            "\nUpdated At: " + updatedAt;
     }
 
 }

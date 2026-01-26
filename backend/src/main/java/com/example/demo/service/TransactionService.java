@@ -64,6 +64,20 @@ public class TransactionService {
         return depositTransaction.getDetails();
     }
 
+    public String makeInternalWithdraw(UUID userId, UUID accountID, TransactionType type, BigDecimal amount, String currency, TransactionStatus status, String externalRef) {
+        User myUser = findUserOrThrow(userId);
+        Account myAccount =  findAccountOrThrow(accountID);
+        if (myAccount.canWithdraw(amount) == false) {
+            throw new Exceptions.InsufficientFundsException(myAccount.getAccountNumber());
+        }
+        else {
+            myAccount.performWithdraw(amount);
+        }
+        Transaction withdrawTransaction = new Transaction(myUser, myAccount, type, amount, currency, status, externalRef);
+        withdrawTransaction.setComplete();
+        return withdrawTransaction.getDetails();
+    }
+
 
 
 }

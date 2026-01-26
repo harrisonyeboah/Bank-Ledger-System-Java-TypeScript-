@@ -31,4 +31,11 @@ public class Exceptions {
         }
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class InsufficientFundsException extends RuntimeException {
+        public InsufficientFundsException(String accountNumber) {
+            super("Insufficient funds for account: " + accountNumber);
+        }
+    }
+
 }
