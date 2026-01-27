@@ -57,27 +57,47 @@ public class TransactionService {
     }
 
 
+ // ------------------- Deposit -------------------
     public String makeInternalDeposit(UUID userId, UUID accountID, TransactionType type, BigDecimal amount, String currency, TransactionStatus status, String externalRef) {
         User myUser = findUserOrThrow(userId);
-        Account myAccount =  findAccountOrThrow(accountID);
+        Account myAccount = findAccountOrThrow(accountID);
+
+        // Perform deposit in memory
+        myAccount.performDeposit(amount);
+
+        // Persist updated balance
+        yeboahAccountRepository.save(myAccount);
+
+        // Create and complete transaction
         Transaction depositTransaction = new Transaction(myUser, myAccount, type, amount, currency, status, externalRef);
-        return depositTransaction.getDetails();
+        depositTransaction.setComplete();
+        yeboahTransactionRepository.save(depositTransaction);
+
+        return depositTransaction.getDetails() + " \nAccount Information: " + myAccount.getAccountDetails();
     }
 
+    // ------------------- Withdraw -------------------
     public String makeInternalWithdraw(UUID userId, UUID accountID, TransactionType type, BigDecimal amount, String currency, TransactionStatus status, String externalRef) {
         User myUser = findUserOrThrow(userId);
-        Account myAccount =  findAccountOrThrow(accountID);
-        if (myAccount.canWithdraw(amount) == false) {
+        Account myAccount = findAccountOrThrow(accountID);
+
+        if (!myAccount.canWithdraw(amount)) {
             throw new Exceptions.InsufficientFundsException(myAccount.getAccountNumber());
         }
-        else {
-            myAccount.performWithdraw(amount);
-        }
+
+        // Perform withdrawal in memory
+        myAccount.performWithdraw(amount);
+
+        // Persist updated balance
+        yeboahAccountRepository.save(myAccount);
+
+        // Create and complete transaction
         Transaction withdrawTransaction = new Transaction(myUser, myAccount, type, amount, currency, status, externalRef);
         withdrawTransaction.setComplete();
-        return withdrawTransaction.getDetails();
-    }
+        yeboahTransactionRepository.save(withdrawTransaction);
 
+        return withdrawTransaction.getDetails() + " \nAccount Information: " + myAccount.getAccountDetails();
+    }
 
 
 }

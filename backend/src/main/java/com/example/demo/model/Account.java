@@ -166,8 +166,9 @@ public class Account {
         );
     }
 
-    public void getBalance() {
+    public BigDecimal getBalance() {
         System.out.println("Account Balance: " + this.balance.toPlainString() + " " + this.currency);
+        return this.balance;
     }
 
     public void setBalance(BigDecimal amount) {
@@ -175,26 +176,44 @@ public class Account {
     }
     
     public boolean canWithdraw(BigDecimal amount) {
-        return this.balance.subtract(amount).compareTo(BigDecimal.ZERO) >= 0;
+        // Amount must be positive
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            return false;
+        }
+        // Amount can't exceed current balance
+        return this.balance.compareTo(amount) >= 0;
     }
+
 
     public void performWithdraw(BigDecimal amount) {
         if (canWithdraw(amount)) {
             this.balance = this.balance.subtract(amount);
         } 
     }
+    public void performDeposit(BigDecimal amount) {
+        System.out.println("Depositing " + amount.toPlainString() + " to account " + this.accountNumber);
+        System.out.println("The previous balance was: " + this.balance.toPlainString());
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Deposit amount must be greater than 0");
+        }
+        this.balance = this.balance.add(amount);
+        System.out.println("The new balance is: " + this.balance.toPlainString());
+        this.updatedAt = LocalDateTime.now(); // update timestamp
+    }
+
 
 
     public String getAccountDetails() {
-        return "Account ID: " + getId() +                // actual account UUID
+        return "Account ID: " + getId() +                
             "\nAccount Type: " + accountType +
             "\nCurrency: " + currency +
-            "\nUser ID: " + user.getId() +           // user UUID
+            "\nUser ID: " + user.getId() +           
             "\nUser Name: " + user.getFirstName() + " " + user.getLastName() +
             "\nStatus: " + status +
             "\nBalance: " + balance.toPlainString() + " " + currency +
             "\nCreated At: " + createdAt +
             "\nUpdated At: " + updatedAt;
     }
+
 
 }
