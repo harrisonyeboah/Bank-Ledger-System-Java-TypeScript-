@@ -38,4 +38,12 @@ public class Exceptions {
         }
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class CurrencyMismatchException extends RuntimeException {
+        public CurrencyMismatchException(String fromAccountNumber, String toAccountNumber) {
+            super("Currency mismatch between accounts: " + fromAccountNumber + " and " + toAccountNumber);
+        }
+    }
+
+
 }

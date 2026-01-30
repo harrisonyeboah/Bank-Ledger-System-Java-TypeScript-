@@ -41,7 +41,7 @@ public class TransactionController {
 
 
 
-    // CREATE
+    // Deposit
     @PostMapping("/internalDeposit")
     @ResponseBody
     public String internalDeposit(
@@ -56,7 +56,7 @@ public class TransactionController {
         return transactionService.makeInternalDeposit(userID, accountID, type, amount, currency, status, externalRef);
     }
 
-    // CREATE
+    // Internal Withdraw
     @PostMapping("/internalWithdraw")
     @ResponseBody
     public String internalWithdraw(
@@ -69,6 +69,22 @@ public class TransactionController {
             @RequestParam(required = false) String externalRef
     ) {
         return transactionService.makeInternalWithdraw(userID, accountID, type, amount, currency, status, externalRef);
+    }
+
+    // Internal Trandsfer
+    @PostMapping("/internalTransfer")
+    @ResponseBody
+    public String internalTransfer(
+            @RequestParam UUID userID,
+            @RequestParam UUID fromAccountID,
+            @RequestParam UUID toAccountID,
+            @RequestParam TransactionType type,
+            @RequestParam BigDecimal amount,
+            @RequestParam String currency,
+            @RequestParam TransactionStatus status,
+            @RequestParam(required = false) String externalRef
+    ) {
+        return transactionService.makeInternalTransfer(userID, fromAccountID, toAccountID, type, amount, currency, status, externalRef);
     }
 
 

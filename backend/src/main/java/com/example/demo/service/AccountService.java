@@ -65,12 +65,13 @@ public String newAccount(UUID userId, String accountType, String accountCurrency
                 yeboahAccountRepository.save(newAccount);
                 accountRef.set(newAccount);  // store in AtomicReference
                 System.out.println("Account made");
+                System.out.println(newAccount.getStatus());
             },
             () -> {
                 System.out.println("User not found");
             }
         );
-
+    
     // Return account details if created
     if (accountRef.get() != null) {
         return accountRef.get().getAccountDetails();

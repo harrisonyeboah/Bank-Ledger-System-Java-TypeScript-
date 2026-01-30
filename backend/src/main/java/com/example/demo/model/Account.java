@@ -48,6 +48,12 @@ public class Account {
         } else {
             this.status = AccountStatus.PENDING;
         }
+        System.out.println("Created new account for user ID: " + accountUser.getId() +
+            " | Account Number: " + this.accountNumber +
+            " | Type: " + this.accountType +
+            " | Currency: " + this.currency +
+            " | Status: " + this.status);
+
     }
 
 

@@ -22,7 +22,7 @@ import com.example.demo.repository.TransactionRepository;
 import com.example.demo.enums.TransactionType;
 import com.example.demo.enums.TransactionStatus;
 import com.example.demo.exceptions.Exceptions;
-
+import com.example.demo.enums.AccountStatus;
 
 
 // Java Imports 
@@ -99,5 +99,38 @@ public class TransactionService {
         return withdrawTransaction.getDetails() + " \nAccount Information: " + myAccount.getAccountDetails();
     }
 
+    // ------------------- Transfer -------------------
+    public String makeInternalTransfer(UUID userId, UUID fromAccountID, UUID toAccountID, TransactionType type, BigDecimal amount, String currency, TransactionStatus status, String externalRef) {
+        User myUser = findUserOrThrow(userId);
+        Account fromAccount = findAccountOrThrow(fromAccountID);
+        Account toAccount = findAccountOrThrow(toAccountID);    
 
+        if (!fromAccount.canWithdraw(amount)) {
+            throw new Exceptions.InsufficientFundsException(fromAccount.getAccountNumber());
+        }
+        // This makes sure we are doing transfers between the same currency 
+        if (!fromAccount.getCurrency().equals(toAccount.getCurrency())) {
+            throw new Exceptions.CurrencyMismatchException(fromAccount.getAccountNumber(), toAccount.getAccountNumber());
+        }
+        // We are going to make sure the status of the account is active
+        if (fromAccount.getStatus() != AccountStatus.ACTIVE || toAccount.getStatus() != AccountStatus.ACTIVE) {
+            throw new RuntimeException("Both accounts must be ACTIVE to perform a transfer.");
+        }
+
+
+        // Perform transfer in memory
+        fromAccount.performWithdraw(amount);
+        toAccount.performDeposit(amount);
+
+        // Persist updated balances
+        yeboahAccountRepository.save(fromAccount);
+        yeboahAccountRepository.save(toAccount);
+
+        // Create and complete transaction
+        Transaction transferTransaction = new Transaction(myUser, fromAccount, type, amount, currency, status, externalRef);
+        transferTransaction.setComplete();
+        yeboahTransactionRepository.save(transferTransaction);
+
+        return transferTransaction.getDetails() + " \nFrom Account Information: " + fromAccount.getAccountDetails() + "\nTo Account Information: " + toAccount.getAccountDetails();
+    }
 }
